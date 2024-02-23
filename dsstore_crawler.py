@@ -106,8 +106,10 @@ def runme(url):
         entries=parse_ds_store(dst)
         if entries is not None:
             for entry in entries:
+                if entry == ".":
+                    continue
                 status=0
-                status=requests.head(url_correct(url)+entry,verify=False, headers=random_headers(),allow_redirects=True)
+                status=requests.head(url_correct(url)+entry,verify=False, headers=random_headers(),allow_redirects=False)
                 if status.url == url_correct(url)+entry:
                     new_url = url_correct(url)+entry
                 else:
